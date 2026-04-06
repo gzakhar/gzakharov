@@ -1,0 +1,136 @@
+---
+layout: default
+title: Ideas
+---
+<!-- Timeline sidebar (right side, wide screens only). Populated by JS at the bottom of this file. -->
+<aside id="timeline" class="timeline"></aside>
+
+<div class="hero hero-small">
+    <h1>Ideas</h1>
+</div>
+
+<div class="ideas-intro">
+    <p>
+        A running log of what I'm thinking about &mdash; libraries I'm using, projects
+        I'm working on, and ideas worth sharing. Newest first.
+    </p>
+</div>
+
+<!-- Tag filter is rendered by JS at the bottom of this file. If JS is disabled, this div stays empty. -->
+<div id="tag-filter" class="tag-filter"></div>
+
+<!--
+    HOW TO ADD A NEW POST:
+    1. Create a new markdown file in _posts/ named YYYY-MM-DD-slug.md
+    2. Add frontmatter: layout: post, title:, date:, tags: [...], excerpt:
+    3. Write the body in markdown.
+    Jekyll auto-discovers the file and the listing, tag filter, and timeline below all update.
+-->
+
+{% for post in site.posts %}
+<article class="post-card">
+    <div class="post-meta">
+        <span class="post-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+        <div class="post-tags">
+            {% for tag in post.tags %}<span class="post-tag">{{ tag }}</span>{% endfor %}
+        </div>
+    </div>
+    <h2 class="post-card-title">
+        <a href="{{ post.url | relative_url }}" target="_self">{{ post.title }}</a>
+    </h2>
+    <p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>
+</article>
+{% endfor %}
+
+<script>
+(function () {
+    const cards = Array.from(document.querySelectorAll('.post-card'));
+    const filterBar = document.getElementById('tag-filter');
+    if (!filterBar || cards.length === 0) return;
+
+    // Collect every unique tag from the post cards on this page
+    const tagSet = new Set();
+    cards.forEach(card => {
+        card.querySelectorAll('.post-tag').forEach(t => tagSet.add(t.textContent.trim()));
+    });
+    const tags = Array.from(tagSet).sort();
+
+    // Render each tag as a toggleable button — none active by default
+    tags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'filter-tag';
+        btn.dataset.tag = tag;
+        btn.textContent = tag;
+        filterBar.appendChild(btn);
+    });
+
+    function applyFilter() {
+        const activeTags = Array.from(filterBar.querySelectorAll('.filter-tag.active'))
+            .map(b => b.dataset.tag);
+
+        cards.forEach(card => {
+            // No active tags = no filter = show everything
+            if (activeTags.length === 0) {
+                card.classList.remove('hidden');
+                return;
+            }
+            // AND filter: post matches only if it has every active tag
+            const cardTags = Array.from(card.querySelectorAll('.post-tag'))
+                .map(t => t.textContent.trim());
+            const matches = activeTags.every(t => cardTags.includes(t));
+            card.classList.toggle('hidden', !matches);
+        });
+    }
+
+    filterBar.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-tag');
+        if (!btn) return;
+        btn.classList.toggle('active');
+        applyFilter();
+    });
+})();
+
+// Timeline: build a vertical list of posts (date + title) from the post cards.
+(function () {
+    const cards = Array.from(document.querySelectorAll('.post-card'));
+    const timeline = document.getElementById('timeline');
+    if (!timeline || cards.length === 0) return;
+
+    const label = document.createElement('div');
+    label.className = 'timeline-label';
+    label.textContent = 'posts';
+    timeline.appendChild(label);
+
+    const list = document.createElement('ol');
+    list.className = 'timeline-list';
+
+    cards.forEach(card => {
+        const dateEl = card.querySelector('.post-date');
+        const titleLink = card.querySelector('.post-card-title a');
+        if (!dateEl || !titleLink) return;
+
+        const item = document.createElement('li');
+        item.className = 'timeline-item';
+
+        const link = document.createElement('a');
+        link.href = titleLink.getAttribute('href');
+        link.target = '_self';
+
+        const date = document.createElement('span');
+        date.className = 'timeline-date';
+        date.textContent = dateEl.textContent.trim();
+
+        const title = document.createElement('span');
+        title.className = 'timeline-title-text';
+        title.textContent = titleLink.textContent.trim();
+
+        link.appendChild(date);
+        link.appendChild(title);
+        item.appendChild(link);
+        list.appendChild(item);
+    });
+
+    timeline.appendChild(list);
+})();
+</script>

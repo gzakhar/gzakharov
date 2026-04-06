@@ -1,0 +1,13 @@
+title: Georgy Zakharov
+description: Backend & Platform Engineer
+
+# Posts get URLs like /ideas/launching-this-site.html (matches existing structure)
+permalink: /ideas/:slug.html
+
+# Project site at https://gzakhar.github.io/gzakharov/
+baseurl: "/gzakharov"
+
+# Don't include these in the build output
+exclude:
+  - README.md
+  - .gitignore
