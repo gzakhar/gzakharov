@@ -1,5 +1,42 @@
 <head>
     <meta charset="UTF-8">
+    <script>
+    (function () {
+        var STORAGE_KEY = 'theme';
+        var root = document.documentElement;
+        var media = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function getStoredMode() {
+            try {
+                return localStorage.getItem(STORAGE_KEY);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function resolveTheme(mode) {
+            return (mode === 'dark' || mode === 'light') ? mode : (media.matches ? 'dark' : 'light');
+        }
+
+        function applyTheme(mode) {
+            root.setAttribute('data-theme', resolveTheme(mode));
+            root.setAttribute('data-theme-mode', mode);
+        }
+
+        applyTheme(getStoredMode() || 'system');
+
+        window.__setThemeMode = function (mode) {
+            try {
+                localStorage.setItem(STORAGE_KEY, mode);
+            } catch (e) {}
+            applyTheme(mode);
+        };
+
+        media.addEventListener('change', function () {
+            if ((getStoredMode() || 'system') === 'system') applyTheme('system');
+        });
+    })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} &middot; {% endif %}Georgy Zakharov</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐙</text></svg>">
