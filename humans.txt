@@ -9,3 +9,4 @@ Maintained with help from TaskBridge AI workers.
 Standards: HTML5, CSS3
 Components: Jekyll
 Software: https://humanstxt.org/
+Automation: TaskBridge
