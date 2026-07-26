@@ -212,6 +212,11 @@ html[data-theme-mode="dark"] .theme-icon-system {
     font-weight: 800;
     letter-spacing: -0.5px;
     line-height: 1.2;
+    color: #2563eb;
+    background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero img {
