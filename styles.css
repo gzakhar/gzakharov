@@ -222,6 +222,22 @@ html[data-theme-mode="dark"] .theme-icon-system {
     flex-shrink: 0;
 }
 
+.hero h1.name-code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    letter-spacing: -1px;
+}
+
+.hero h1.name-code::after {
+    content: '_';
+    animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+    50% {
+        opacity: 0;
+    }
+}
+
 .hero-small {
     padding: 40px 0 10px;
 }
