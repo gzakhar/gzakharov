@@ -78,7 +78,7 @@ body {
     font-size: 15px;
     padding: 0 100px 60px;
     max-width: 900px;
-    transition: background-color 200ms ease, color 200ms ease;
+    margin: 0 auto;
 }
 
 @media (max-width: 650px) {
