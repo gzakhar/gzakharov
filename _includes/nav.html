@@ -3,3 +3,31 @@
     <a href="{{ '/ideas.html' | relative_url }}" target="_self"{% if page.url contains '/ideas' %} class="active"{% endif %}>ideas</a>
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">???</a>
 </nav>
+
+<script>
+(function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    var MODES = ['system', 'light', 'dark'];
+    var LABELS = { system: 'System', light: 'Light', dark: 'Dark' };
+
+    function currentMode() {
+        return document.documentElement.getAttribute('data-theme-mode') || 'system';
+    }
+
+    function updateLabel() {
+        var mode = currentMode();
+        btn.setAttribute('aria-label', 'Theme: ' + LABELS[mode] + '. Click to switch theme.');
+        btn.title = 'Theme: ' + LABELS[mode];
+    }
+
+    updateLabel();
+
+    btn.addEventListener('click', function () {
+        var next = MODES[(MODES.indexOf(currentMode()) + 1) % MODES.length];
+        window.__setThemeMode(next);
+        updateLabel();
+    });
+})();
+</script>
