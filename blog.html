@@ -1,0 +1,40 @@
+---
+layout: default
+title: Blog
+---
+<div class="hero hero-small">
+    <h1>Blog</h1>
+</div>
+
+<div class="ideas-intro">
+    <p>
+        Longer-form writing &mdash; essays and stories rather than the running log
+        over on <a href="{{ '/ideas.html' | relative_url }}" target="_self">ideas</a>.
+    </p>
+</div>
+
+<!--
+    HOW TO ADD A NEW BLOG POST:
+    1. Create a new markdown file in _blog/ named YYYY-MM-DD-slug.md
+    2. Add frontmatter: layout: blog-post, title:, date:, image:, excerpt:
+    3. Write the body in markdown.
+    Jekyll auto-discovers the file and the list below updates.
+-->
+
+<div class="blog-list">
+{% assign posts = site.blog | sort: "date" | reverse %}
+{% for post in posts %}
+<article class="blog-card">
+    <a class="blog-thumb-link" href="{{ post.url | relative_url }}" target="_self">
+        <img class="blog-thumb" src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+    </a>
+    <div class="blog-content">
+        <span class="post-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+        <h2 class="blog-card-title">
+            <a href="{{ post.url | relative_url }}" target="_self">{{ post.title }}</a>
+        </h2>
+        <p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>
+    </div>
+</article>
+{% endfor %}
+</div>

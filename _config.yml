@@ -4,6 +4,12 @@ description: Backend & Platform Engineer
 # Posts get URLs like /ideas/launching-this-site.html (matches existing structure)
 permalink: /ideas/:slug.html
 
+# Blog posts (separate collection from the /ideas log) get URLs like /blog/some-post.html
+collections:
+  blog:
+    output: true
+    permalink: /blog/:slug.html
+
 # Project site at https://gzakhar.github.io/gzakharov/
 baseurl: "/gzakharov"
 
