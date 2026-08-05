@@ -12,4 +12,4 @@ RUN apt-get update \
 
 # The worker CLI itself + a static file server so the worker can serve the
 # site and check its work (this is a static HTML/CSS project).
-RUN npm install -g @anthropic-ai/claude-code http-server
+RUN npm install -g @anthropic-ai/claude-code @openai/codex http-server
