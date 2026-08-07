@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Ideas
+body_class: ideas-page
 ---
-<!-- Timeline sidebar (right side, wide screens only). Populated by JS at the bottom of this file. -->
-<aside id="timeline" class="timeline"></aside>
+<div class="ideas-layout">
 
 <div class="hero hero-small">
     <h1>Ideas</h1>
@@ -18,6 +18,11 @@ title: Ideas
 
 <!-- Tag filter is rendered by JS at the bottom of this file. If JS is disabled, this div stays empty. -->
 <div id="tag-filter" class="tag-filter"></div>
+
+<!-- Populated by JS below. A sidebar on wide screens and an in-flow index otherwise. -->
+<aside id="timeline" class="timeline" aria-label="Posts timeline"></aside>
+
+<div class="ideas-posts">
 
 <!--
     HOW TO ADD A NEW POST:
@@ -41,6 +46,8 @@ title: Ideas
     <p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>
 </article>
 {% endfor %}
+</div>
+</div>
 
 <script>
 (function () {
