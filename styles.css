@@ -407,28 +407,42 @@ h2 {
 
 /* -- Timeline sidebar (ideas page) -- */
 
-.timeline {
-    position: fixed;
-    top: 100px;
-    /*
-     * The body's backdrop-filter makes it the containing block for fixed
-     * descendants. Position from that containing block's right edge instead
-     * of recalculating the page edge from the viewport width.
-     */
-    left: calc(100% + 24px);
-    width: 220px;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-    display: none;
+.ideas-layout {
+    display: grid;
 }
 
-/*
- * The main page is 900px wide. Only show the 220px timeline when the right
- * gutter can hold it with a 24px gap, so it never overlaps the page content.
- */
-@media (min-width: 1450px) {
+.timeline {
+    margin: 10px 0 28px;
+    padding: 18px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 1144px) {
+    body.ideas-page {
+        max-width: 1144px;
+    }
+
+    .ideas-layout {
+        grid-template-columns: minmax(0, 700px) 220px;
+        column-gap: 24px;
+    }
+
+    .ideas-layout > :not(.timeline) {
+        grid-column: 1;
+    }
+
     .timeline {
-        display: block;
+        grid-column: 2;
+        grid-row: 1 / span 4;
+        align-self: start;
+        position: sticky;
+        top: 36px;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+        margin: 40px 0 0;
+        padding: 0;
+        border: 0;
     }
 }
 
@@ -440,6 +454,27 @@ h2 {
     margin-bottom: 18px;
     padding-left: 24px;
     font-weight: 700;
+}
+
+@media (max-width: 1143px) {
+    .timeline-label {
+        margin-bottom: 12px;
+        padding-left: 0;
+    }
+
+    .timeline-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px 24px;
+    }
+
+    .timeline-list::before {
+        display: none;
+    }
+
+    .timeline-item {
+        margin-bottom: 0;
+    }
 }
 
 .timeline-list {
