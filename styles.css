@@ -6,6 +6,7 @@
 
 :root {
     --color-bg: #fff;
+    --color-bg-surface: rgba(255, 255, 255, 0.88);
     --color-text: #111;
     --color-text-secondary: #333;
     --color-text-body: #222;
@@ -27,6 +28,7 @@
 
 html[data-theme="dark"] {
     --color-bg: #121212;
+    --color-bg-surface: rgba(18, 18, 18, 0.9);
     --color-text: #f2f2f2;
     --color-text-secondary: #d0d0d0;
     --color-text-body: #dcdcdc;
@@ -49,6 +51,7 @@ html[data-theme="dark"] {
 @media (prefers-color-scheme: dark) {
     html:not([data-theme]) {
         --color-bg: #121212;
+        --color-bg-surface: rgba(18, 18, 18, 0.9);
         --color-text: #f2f2f2;
         --color-text-secondary: #d0d0d0;
         --color-text-body: #dcdcdc;
@@ -69,19 +72,36 @@ html[data-theme="dark"] {
     }
 }
 
+html {
+    min-height: 100%;
+    background-color: #8497a2;
+    background-image: url('assets/images/golden-gate-bridge-background.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     color: var(--color-text);
-    background: var(--color-bg);
+    background: var(--color-bg-surface);
+    box-shadow: 0 0 45px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     line-height: 1.7;
     font-size: 15px;
     padding: 0 100px 60px;
     max-width: 900px;
+    min-height: 100vh;
     margin: 0 auto;
 }
 
 @media (max-width: 650px) {
+    html {
+        background-attachment: scroll;
+    }
+
     body {
         padding: 0 24px 40px;
     }
