@@ -410,7 +410,12 @@ h2 {
 .timeline {
     position: fixed;
     top: 100px;
-    right: calc((100vw - 900px) / 2 - 244px);
+    /*
+     * The body's backdrop-filter makes it the containing block for fixed
+     * descendants. Position from that containing block's right edge instead
+     * of recalculating the page edge from the viewport width.
+     */
+    left: calc(100% + 24px);
     width: 220px;
     max-height: calc(100vh - 200px);
     overflow-y: auto;
