@@ -100,6 +100,14 @@ html::before {
     pointer-events: none;
 }
 
+html[data-background-region="west"]::before {
+    background-image: url('assets/images/golden-gate-bridge-background.png');
+}
+
+html[data-background-region="east"]::before {
+    background-image: url('assets/images/manhattan-skyline-background.png');
+}
+
 body {
     position: relative;
     z-index: 1;
