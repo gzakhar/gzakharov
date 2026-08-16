@@ -83,7 +83,7 @@ html[data-theme="dark"] {
 
 html {
     min-height: 100%;
-    background-color: #8497a2;
+    background-color: #18365d;
 }
 
 html::before {
@@ -91,7 +91,7 @@ html::before {
     position: fixed;
     inset: 0;
     z-index: 0;
-    background-image: url('assets/images/golden-gate-bridge-background.png');
+    background-image: url('assets/images/manhattan-skyline-background.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
