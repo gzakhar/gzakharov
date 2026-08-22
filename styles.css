@@ -410,6 +410,10 @@ h2 {
     box-shadow: 0 12px 32px var(--color-card-shadow);
 }
 
+.certification-card + .certification-card {
+    margin-top: 24px;
+}
+
 .certification-image-link {
     display: block;
     padding: 14px;
@@ -433,10 +437,21 @@ h2 {
     transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
+.certification-image--badge {
+    object-fit: contain;
+    border: 0;
+    box-shadow: none;
+}
+
 .certification-image-link:hover .certification-image,
 .certification-image-link:focus .certification-image {
     transform: translateY(-2px);
     box-shadow: 0 7px 18px rgba(0, 0, 0, 0.17);
+}
+
+.certification-image-link:hover .certification-image--badge,
+.certification-image-link:focus .certification-image--badge {
+    box-shadow: none;
 }
 
 .certification-content {
