@@ -39,6 +39,21 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} &middot; {% endif %}Georgy Zakharov</title>
+    {% assign meta_description = page.description | default: "Backend and platform engineer building infrastructure for financial systems — risk engines, custody platforms, and compliance integrations at scale." %}
+    {% assign meta_title = page.title | default: "Georgy Zakharov" %}
+    {% assign meta_image = "https://avatars.githubusercontent.com/u/52760426?v=4" %}
+    {% assign meta_page_path = page.url | relative_url %}
+    {% assign meta_url = "https://gzakhar.github.io" | append: meta_page_path %}
+    <meta name="description" content="{{ meta_description }}">
+    <meta property="og:title" content="{{ meta_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ meta_url }}">
+    <meta property="og:image" content="{{ meta_image }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ meta_title }}">
+    <meta name="twitter:description" content="{{ meta_description }}">
+    <meta name="twitter:image" content="{{ meta_image }}">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐙</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
